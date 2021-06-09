@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Article</title>
+    <%- include('../common/head') %>
+</head>
+
+<body>
+    <div class="container">
+
+        <h1 class="mb-2">
+            <%= article.title %>
+        </h1>
+
+        <p class="text-muted mb-2">
+            <%= article.createdAt.toLocaleDateString() %>
+        </p>
+
+        <div class="mb-2">
+            <a href="/" class="btn btn-secondary">All Articles</a>
+            <a href="/articles/edit/<%= article.id %>" class="btn btn-primary">Edit</a>
+        </div>
+
+        <p>
+            <%- article.sanitizedHtml %>
+        </p>
+
+    </div>
+</body>
+
+</html>
