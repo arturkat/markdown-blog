@@ -20,7 +20,10 @@ mongoose.connect(process.env.DATABASE_URL, {
     useCreateIndex: true
 })
 const db = mongoose.connection
-db.on('error', error => console.error(error))
+db.on('error', (error) => {
+    console.error('DB connection error!')
+    console.error(error)
+})
 db.once('open', () => console.log('Connected to Mongoose'))
 // mongoose.connect('mongodb://localhost/markdown-blog', {
 //     useNewUrlParser: true,

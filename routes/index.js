@@ -5,9 +5,13 @@ const router = express.Router()
 const Article = require('../models/article')
 
 router.get('/', async (req, res) => {
-    let articles = await Article.find().sort({
-        createdAt: 'desc'
-    })
+    try {
+        let articles = await Article.find().sort({
+            createdAt: 'desc'
+        })
+    } catch (error) {
+        console.log(error)
+    }
     res.render('articles/index', {
         articles: articles
     })
