@@ -22,6 +22,12 @@
             <a href="/articles/edit/<%= article.id %>" class="btn btn-primary">Edit</a>
         </div>
 
+        <% if (article.coverImagePath != null) { %>
+        <figure class="figure">
+            <img src="<%= article.coverImagePath %>" class="figure-img img-fluid rounded">
+        </figure>
+        <% } %>
+
         <p>
             <%- article.sanitizedHtml %>
         </p>

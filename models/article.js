@@ -1,10 +1,14 @@
 const mongoose = require('mongoose')
 const marked = require('marked') // Converts markdown markup to html
 const slugify = require('slugify') // Converts article's title to friendly url
+const path = require('path')
 
 const createDomPurify = require('dompurify') // sanitize the html from textarea
 const { JSDOM } = require('jsdom') // module for 'dompurify'
 const dompurify = createDomPurify(new JSDOM().window) // this allows as to create an html and purify it using JSDOM().window object
+
+// Create base path for storing the cover images
+const coverImageBasePath = 'uploads/articleCovers'
 
 const articleSchema = new mongoose.Schema({
     title: {
@@ -31,6 +35,22 @@ const articleSchema = new mongoose.Schema({
     sanitizedHtml: {
         type: String,
         required: true
+    },
+    coverImageName: {
+        type: String,
+        require: false
+    },
+    author: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: false,
+        ref: 'Author'
+    }
+})
+
+// When we call the 'coverImagePath' it calls this get function
+articleSchema.virtual('coverImagePath').get(function () {
+    if (this.coverImageName != null) {
+        return path.join('/', coverImageBasePath, this.coverImageName)
     }
 })
 
@@ -53,3 +73,4 @@ articleSchema.pre('validate', function (next) {
 })
 
 module.exports = mongoose.model('Article', articleSchema)
+module.exports.coverImageBasePath = coverImageBasePath
