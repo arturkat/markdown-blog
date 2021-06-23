@@ -22,11 +22,33 @@
             <a href="/articles/edit/<%= article.id %>" class="btn btn-primary">Edit</a>
         </div>
 
+        <h5>
+            coverImagePath:
+        </h5>
+        <p>
+            <%= article.coverImagePath %>
+        </p>
         <% if (article.coverImagePath != null) { %>
         <figure class="figure">
             <img src="<%= article.coverImagePath %>" class="figure-img img-fluid rounded">
         </figure>
         <% } %>
+
+        <hr>
+
+        <h5>
+            coverImageDBPath:
+        </h5>
+        <p>
+            <%= article.coverImageDBPath %>
+        </p>
+        <% if (article.coverImageDBPath != null) { %>
+        <figure class="figure">
+            <img src="<%= article.coverImageDBPath %>" class="figure-img img-fluid rounded">
+        </figure>
+        <% } %>
+
+        <hr>
 
         <p>
             <%- article.sanitizedHtml %>

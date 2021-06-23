@@ -40,6 +40,14 @@ const articleSchema = new mongoose.Schema({
         type: String,
         require: false
     },
+    coverImageDB: {
+        type: Buffer,
+        require: false
+    },
+    coverImageDBType: {
+        type: String,
+        require: false
+    },
     author: {
         type: mongoose.Schema.Types.ObjectId,
         required: false,
@@ -51,6 +59,13 @@ const articleSchema = new mongoose.Schema({
 articleSchema.virtual('coverImagePath').get(function () {
     if (this.coverImageName != null) {
         return path.join('/', coverImageBasePath, this.coverImageName)
+    }
+})
+
+// When we call the 'coverImagePath' it calls this get function
+articleSchema.virtual('coverImageDBPath').get(function () {
+    if (this.coverImageDB != null && this.coverImageDBType != null) {
+        return `data:${this.coverImageDBType};charset=utf-8;base64,${this.coverImageDB.toString('base64')}`
     }
 })
 
