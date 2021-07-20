@@ -130,14 +130,14 @@ function saveArticleAndRedirect(route) {
             }
         }
 
-        // add new article route
+        // the 'new' article route
         if (route === 'new') {
             if (cover != null) {
                 article.coverImageName = cover.filename
             }
         }
 
-        // edit the acrticle route
+        // the 'edit' acrticle route
         if (route === 'edit') {
             // add new cover to the file system
             if (cover != null) {
